@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="listViewModel"
+                type="black.trevor.demo.publicfeed2019.ui.viewmodel.PublicFeedListViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/public_feed_coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:showErrorBind="@{listViewModel.onError}">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/public_feed_swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isLoadingBind="@{listViewModel.isLoading}"
+                app:refreshBind="@{listViewModel}">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/public_feed_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layoutManager="LinearLayoutManager"
+                    app:publicFeedList="@{listViewModel.items}"
+                    tools:listitem="@layout/item_feed" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
